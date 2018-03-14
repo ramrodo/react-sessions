@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import MenuItemList from '../presentational/MenuItemList';
-import Menu from '../presentational/Menu';
-import Container from '../presentational/Container';
-import Header from '../presentational/Header';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import MenuItemList from "../presentational/MenuItemList";
+import Menu from "../presentational/Menu";
+import Container from "../presentational/Container";
+import Header from "../presentational/Header";
+import styled from "styled-components";
 import {
   FragmentsExample,
   CustomAttributesExample,
   PortalExample,
   ErrorBoundariesExample,
   AnimationExample,
-} from '../pages';
+} from "../pages";
 
 import {
   Route,
@@ -19,22 +19,22 @@ import {
   NavLink,
   Switch,
   withRouter,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 const contentMap = {
-  'animation': <AnimationExample />,
-  'fragments': <FragmentsExample />,
-  'custom attributes': <CustomAttributesExample />,
-  'portals': <PortalExample />,
-  'error boundaries': <ErrorBoundariesExample />,
+  animation: <AnimationExample />,
+  fragments: <FragmentsExample />,
+  "custom attributes": <CustomAttributesExample />,
+  portals: <PortalExample />,
+  "error boundaries": <ErrorBoundariesExample />,
 };
 
 const sections = [
-  'animation',
-  'fragments',
-  'custom attributes',
-  'portals',
-  'error boundaries',
+  "animation",
+  "fragments",
+  "custom attributes",
+  "portals",
+  "error boundaries",
 ];
 
 const Wrapper = styled.div`
@@ -48,15 +48,14 @@ class App extends Component {
     this.onMenuItemClicked = this.onMenuItemClicked.bind(this);
   }
 
-
   onMenuItemClicked(currentSection) {
-    const changeSection = (prevState) => {
+    const changeSection = prevState => {
       if (prevState.currentSection === currentSection) {
         return null;
       }
 
       return { currentSection };
-    }
+    };
 
     this.setState(changeSection);
   }
@@ -69,9 +68,20 @@ class App extends Component {
         <Header />
         <Wrapper>
           <div>
-            <Menu items={sections} onClick={this.onMenuItemClicked} active={currentSection} />
+            <Menu
+              items={sections}
+              onClick={this.onMenuItemClicked}
+              active={currentSection}
+            />
           </div>
-          {contentMap[this.state.currentSection]}
+          {sections.map(item => (
+            <Route
+              key={item}
+              path={`/${item}`}
+              component={() => contentMap[item]}
+            />
+          ))}
+          {/* <Route exact path="/" render={() => <Redirect to="/animation" />} /> */}
         </Wrapper>
       </div>
     );

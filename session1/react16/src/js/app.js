@@ -1,11 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-} from 'react-router-dom';
-import App from './components/container/App';
-import reset from '../reset.css';
-import { injectGlobal } from 'styled-components';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./components/container/App";
+import reset from "../reset.css";
+import { injectGlobal } from "styled-components";
 
 injectGlobal`
   body {
@@ -13,6 +11,11 @@ injectGlobal`
   }
 `;
 
-const mountNode = document.getElementById('main-app');
+const mountNode = document.getElementById("main-app");
 
-ReactDOM.render(<App />, mountNode);
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  mountNode,
+);

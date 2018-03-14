@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const LI = styled.li`
   background: lightblue;
@@ -20,17 +21,19 @@ const LI = styled.li`
   ${({ active }) => {
     if (active) {
       return `
-        background: red;
+        background: green;
         color: white;
       `;
     }
-  }}
+  }};
 `;
 
-const MenuItem = ({ onClick, children, active}) => (
-  <LI onClick={onClick} active={children === active}>
-    {children}
-  </LI>
+const MenuItem = ({ onClick, children, active }) => (
+  <NavLink to={children} activeClassName="active">
+    <LI onClick={onClick} active={children === active}>
+      {children}
+    </LI>
+  </NavLink>
 );
 
 export default MenuItem;
