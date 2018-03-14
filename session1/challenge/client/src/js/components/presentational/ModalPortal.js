@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { createPortal } from 'react-dom';
-import { ModalStyled } from './ModalPortal.styled.js';
+import { createPortal } from "react-dom";
+import { ModalStyled } from "./ModalPortal.styled.js";
 
 const Modal = ({ open, onClick, children }) => {
+  console.log("modal abierto!");
   return (
-    <ModalStyled open={open} >
-      <div onClick={onClick}>
-        Click to close
-      </div>
+    <ModalStyled open={open}>
+      <div onClick={onClick}>Click to close</div>
       {children}
     </ModalStyled>
   );
-}
+};
 
-const Portal = null;
+const Portal = ({ children }) => {
+  const toNode = document.body;
+  return createPortal(children, toNode);
+};
 
 export default Portal;
 export { Modal };
